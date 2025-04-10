@@ -26,6 +26,7 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
+    "bcrypt": "^5.1.1",
     "module-alias": "^2.2.3",
     "nodemon": "^3.1.9",
     "pg": "^8.14.1",
