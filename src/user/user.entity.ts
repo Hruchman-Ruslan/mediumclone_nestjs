@@ -1,5 +1,5 @@
-import { hash } from 'bcrypt';
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { hash } from 'bcrypt';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -8,6 +8,9 @@ export class UserEntity {
 
   @Column()
   email: string;
+
+  @Column()
+  username: string;
 
   @Column({ default: '' })
   bio: string;
