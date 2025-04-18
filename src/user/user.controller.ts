@@ -14,6 +14,8 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { LoginUserDto } from './dto/loginUser.dto';
 import { ExpressRequestInterface } from '@app/types/expressRequest.interface';
+import { User } from './decorators/user.decorator';
+import { UserEntity } from './user.entity';
 
 @Controller()
 export class UserController {
@@ -39,12 +41,10 @@ export class UserController {
 
   @Get('user')
   async getCurrentUser(
-    @Req() request: ExpressRequestInterface,
+    @User() user: UserEntity,
+    @User('id') currentUserId: number,
   ): Promise<UserResponseInterface> {
-    if (!request.user) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED); // ????????????
-    }
-
-    return this.userService.buildUserResponse(request.user);
+    console.log('userId', currentUserId);
+    return this.userService.buildUserResponse(user);
   }
 }
