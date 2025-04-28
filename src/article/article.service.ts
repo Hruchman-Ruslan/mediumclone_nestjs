@@ -1,5 +1,5 @@
 import { UserEntity } from '@app/user/user.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateArticleDto } from './dto/createArticle.dto';
 import { ArticleEntity } from './article.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,6 +30,16 @@ export class ArticleService {
     article.author = currentUser;
 
     return await this.articleRepository.save(article);
+  }
+
+  async findBySlug(slug: string): Promise<ArticleEntity> {
+    const article = await this.articleRepository.findOne({ where: { slug } });
+
+    if (!article) {
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
+    }
+
+    return article;
   }
 
   buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {
