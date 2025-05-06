@@ -3,4 +3,5 @@ export interface ArticleQuery {
   limit?: number;
   offset?: number;
   tag?: string;
+  favorited?: string;
 }

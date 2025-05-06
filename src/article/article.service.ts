@@ -52,6 +52,19 @@ export class ArticleService {
       });
     }
 
+    if (query.favorited) {
+      const author = await this.userRepository.findOne({
+        where: { username: query.favorited },
+        relations: ['favorites'],
+      });
+      const ids = author?.favorites.map((el) => el.id);
+      if (!ids?.length) {
+        queryBuilder.andWhere('1=0');
+      } else {
+        queryBuilder.andWhere('articles.id IN (:...ids)', { ids });
+      }
+    }
+
     if (query.limit) {
       queryBuilder.limit(query.limit);
     }
