@@ -18,6 +18,7 @@ import { UserEntity } from '@app/user/user.entity';
 import { CreateArticleDto } from './dto/createArticle.dto';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
 import { ArticlesResponseInterface } from './types/articlesResponse.interface';
+import { ArticleQuery } from './types/articleQuery.interface';
 
 @Controller('articles')
 export class ArticleController {
@@ -25,8 +26,8 @@ export class ArticleController {
 
   @Get()
   async findAllArticles(
-    @User() currentUserId: number,
-    @Query() query: any,
+    @User('id') currentUserId: number,
+    @Query() query: ArticleQuery,
   ): Promise<ArticlesResponseInterface> {
     return await this.articleService.findAll(currentUserId, query);
   }
