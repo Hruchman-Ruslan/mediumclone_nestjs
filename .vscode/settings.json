@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["favorited", "mediumclone", "ormconfig", "ormdatasource"]
+  "cSpell.words": [
+    "favorited",
+    "mediumclone",
+    "ormconfig",
+    "ormdatasource",
+    "ormseedconfig",
+    "ormseeddatasource"
+  ]
 }
